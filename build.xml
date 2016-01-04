@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<project name="file-driven-organizer">
+
+	<description>
+		Buildfile do projeto file-driven-organizer
+	</description>
+
+	<property name="src.dir" location="src" />
+	<property name="src.main.dir" location="${src.dir}/main" />
+	<property name="src.test.dir" location="${src.dir}/test" />
+
+</project>
