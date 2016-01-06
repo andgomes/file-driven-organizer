@@ -9,5 +9,32 @@
 	<property name="src.dir" location="src" />
 	<property name="src.main.dir" location="${src.dir}/main" />
 	<property name="src.test.dir" location="${src.dir}/test" />
+	<property name="build.dir" location="build" />
+	<property name="classes.dir" location="${build.dir}/classes" />
+	<property name="main.classes.dir" location="${classes.dir}/main" />
+
+	<target name="init" 
+			description="cria os diretórios necessários para outros targets">
+
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+
+	</target>
+
+	<target name="compile" depends="init" 
+			description="compila o código de domínio">
+
+		<mkdir dir="${main.classes.dir}" />
+
+		<javac srcdir="${src.main.dir}" destdir="${main.classes.dir}" />
+
+	</target>
+
+	<target name="clean" 
+			description="remove os diretórios criados durante o build">
+
+		<delete dir="${build.dir}" />
+
+	</target>
 
 </project>
