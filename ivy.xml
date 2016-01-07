@@ -1,0 +1,12 @@
+<ivy-module version="1.4">
+
+	<info organisation="com.andgomes" module="file-driven-organizer" />
+	
+	<dependencies>
+	
+		<dependency org="junit" name="junit" rev="4.12" />
+		<dependency org="org.hamcrest" name="hamcrest-core" rev="a.3" />
+	
+	</dependencies>
+
+</ivy-module>
