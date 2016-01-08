@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="file-driven-organizer">
+<project xmlns:ivy="antlib:fr.jayasoft.ivy.ant" name="file-driven-organizer">
 
 	<description>
 		Buildfile do projeto file-driven-organizer
