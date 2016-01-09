@@ -22,6 +22,53 @@
 
 	</target>
 
+	<target name="ivy-init" description="cria a property nome do diretório dos 
+			artefatos trazidos pelo Ivy">
+	
+		<property name="ivy.lib.dir" location="${build.dir}/ivy/lib" />
+
+	</target>
+
+	<target name="ivy-resolve" depends="ivy-init" description="resolve as 
+			dependências do projeto">
+
+		<ivy:resolve />
+
+	</target>
+
+	<target name="ivy-report" depends="ivy-resolve" description="cria o report 
+			das dependências do projeto">
+
+		<ivy:report todir="${build.dir}/ivy/report" />		
+
+	</target>
+
+	<target name="ivy-retrieve" depends="ivy-resolve" description="recupera os 
+			artefatos de dependência do projeto">
+
+		<ivy:retrieve 
+			pattern="${ivy.lib.dir}/[conf]/[artifact]-[type]-[revision].[ext]">
+		</ivy:retrieve>
+
+	</target>
+
+	<target name="classpaths" depends="ivy-retrieve">
+
+		<path id="ivy.lib">
+
+			<fileset dir="${ivy.lib.dir}" includes="**/*.jar" />
+
+		</path>
+
+		<path id="test.compile.classpath">
+
+			<path refid="ivy.lib" />
+			<pathelement location="${main.classes.dir}" />
+
+		</path>
+
+	</target>
+
 	<target name="compile" depends="init" 
 			description="compila o código de domínio">
 
@@ -31,12 +78,13 @@
 
 	</target>
 	
-	<target name="compile-test" depends="init" 
+	<target name="compile-test" depends="init, classpaths, compile" 
 			description="compila o código de teste">
 		
 		<mkdir dir="${test.classes.dir}" />	
 			
-		<javac srcdir="${src.test.dir}" destdir="${test.classes.dir}" />		
+		<javac srcdir="${src.test.dir}" destdir="${test.classes.dir}" 
+			classpathref="test.compile.classpath" />		
 			
 	</target>		
 
